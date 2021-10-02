@@ -1,10 +1,8 @@
 name: Get CRAN Stats
-
 on:
   schedule:
     - cron: '0 8 * * 5' # Runs every friday at 8.00
   workflow_dispatch:
-
 jobs:
   cran-stats:
     name: Get CRAN Status
@@ -39,7 +37,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add --all
-          git commit -m 'updated recent blogposts'
+          git commit -m 'refreshed CRAN download data'
           git push
       - name: Cache pip
         uses: actions/cache@v2
