@@ -1,7 +1,7 @@
 name: Get CRAN Stats
 on:
   schedule:
-    - cron: '0 8 * * 5' # Runs every friday at 8.00
+    - cron: '30 9 * * *' # Runs every day at 09:30
   workflow_dispatch:
 jobs:
   cran-stats:
