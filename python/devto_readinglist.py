@@ -41,6 +41,9 @@ class DevTo:
         
         Retrieve user reading list
         
+        @references
+            https://developers.forem.com/api#operation/getReadinglist
+        
         """
         if not self.readinglist:
             data = self.__send__request__(url = self.host + 'readinglist')
