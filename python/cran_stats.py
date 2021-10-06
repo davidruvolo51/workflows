@@ -3,8 +3,8 @@ import pandas as pd
 import requests
 import re
 from datetime import datetime
-import calplot
-import matplotlib.pyplot as plt
+# import calplot
+# import matplotlib.pyplot as plt
 
 # Get CRAN Stats
 # Get download stats from CRAN from http://cranlogs.r-pkg.org
