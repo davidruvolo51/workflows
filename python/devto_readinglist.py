@@ -90,9 +90,11 @@ class DevTo:
 #//////////////////////////////////////////////////////////////////////////////
             
 # Fetch readinglist
+print('Starting session...')
 devto = DevTo(token = environ.get('DEVTO_TOKEN'))
 
 # Get posts in batches
+print('Pulling data...')
 sendRequests = True
 readinglist = []
 ids = []
@@ -105,11 +107,11 @@ while sendRequests:
             readinglist.append(d)
             ids.append(d['id'])
         else:
-            # sendRequests = False
-            break
+            sendRequests = False
     p += 1
     sleep(0.3)
 
 # write to csv
+print('Saving data to csv...')
 posts = pd.DataFrame(readinglist).sort_values(by = 'published_at', key=pd.to_datetime, ascending = False)
 posts.to_csv('data/devto_readinglist.csv', index=False)
