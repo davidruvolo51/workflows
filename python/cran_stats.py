@@ -3,7 +3,8 @@ import pandas as pd
 import requests
 import re
 from datetime import datetime
-
+# import calplot
+# import matplotlib.pyplot as plt
 
 # Get CRAN Stats
 # Get download stats from CRAN from http://cranlogs.r-pkg.org
@@ -49,7 +50,13 @@ class getCranStats:
         self.__validate__date__(start)
         self.__validate__date__(end)
         
-        url = '{}/{}/{}:{}/{}'.format(self.host, self.endpoint, start, end, package)
+        url = '{}/{}/{}:{}/{}'.format(
+            self.host,
+            self.endpoint,
+            start,
+            end,
+            package
+        )
 
         try:
             response = requests.get(url = url, headers = self.headers)
@@ -67,4 +74,14 @@ start = '2021-02-26' # date accepted
 end = str(datetime.now().date()) # today's date
 
 raw = c.dailyDownloads('rheroicons', start, end)[0]['downloads']
-pd.DataFrame(raw).to_csv('data/rheroicons_daily_downloads.csv', index=False)
+downloads = pd.DataFrame(raw)
+
+# save data
+downloads.to_csv('data/rheroicons_daily_downloads.csv', index=False)
+
+# build plot
+# downloads['day'] = pd.to_datetime(downloads.day, yearfirst = True)
+# downloads.set_index('day', inplace = True)
+# fig = calplot.calplot(downloads['downloads'], how = 'sum')
+
+# plt.show()
