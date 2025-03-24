@@ -1,7 +1,7 @@
 name: Get CRAN Stats
 on:
   schedule:
-    - cron: '30 9 * * 2,4' # Runs Tue and Fri day at 09:30
+    - cron: '30 9 * * 2,5' # Runs Tue and Fri day at 09:30
   workflow_dispatch:
 jobs:
   cran-stats:
@@ -12,14 +12,14 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        python-version: [3.8]
+        python-version: [3.13]
 
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v2 # checkout the repository content to github runner.
+        uses: actions/checkout@v4 # checkout the repository content to github runner.
 
       - name: setup python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
   
@@ -40,7 +40,7 @@ jobs:
           git commit -m 'refreshed CRAN download data'
           git push
       - name: Cache pip
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           # This path is specific to Ubuntu
           path: ~/.cache/pip
